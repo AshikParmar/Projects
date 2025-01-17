@@ -4,10 +4,12 @@ import './App.css'
 function App() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState('');
+
+
   
   const addTask = (i) => {
     if(input){
-      setTasks([...tasks, { text: input, completed: false }]);
+      setTasks([...tasks, { text: input, completed: false, editable: false }]);
       setInput('');
     }
 
@@ -16,6 +18,11 @@ function App() {
 
   const toggleTask = (index) => {
     const newTasks = tasks.map((task, i) => i === index ? {...task, completed: !task.completed } : task);
+    setTasks(newTasks);
+  };
+
+  const toggleEditable = (index) => {
+    const newTasks = tasks.map((task, i) => i === index ? {...task, editable: !task.editable } : task);
     setTasks(newTasks);
   };
 
@@ -50,9 +57,13 @@ function App() {
         <ul className='task-list'>
           {tasks.map((task, index) => (
             <li key={index} className={task.completed ? 'task-completed task' : 'task'}>
-              <span contentEditable onDoubleClick={()=> toggleTask(index)} >{task.text}</span>
-
-              <button onClick={() => deleteTask(index)} >Delete</button>
+              <span contentEditable={task.editable ? true : false} 
+              className={task.editable ? "editable" : null}
+              onDoubleClick={()=> toggleTask(index)} >{task.text}</span>
+              <div>
+                <button className='update' onClick={() => toggleEditable(index)} >update</button>
+                <button onClick={() => deleteTask(index)} >Delete</button>
+              </div>
 
 
             </li>

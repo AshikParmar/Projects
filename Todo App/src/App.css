@@ -60,6 +60,19 @@
   color: #888;
 }
 
+.task .editable{
+  border: 1px solid black;
+}
+
+.task .update{
+  margin-right: 5px;
+  background-color: blue;
+}
+
+.task #update:hover{
+  background-color: #1717a2;
+}
+
 .task button{
   text-decoration: none  !important;
   background-color: #dc3545;
@@ -71,5 +84,5 @@
 }
 
 .task button:hover{
-  background-color: #c82333;
+  background-color: #a31a27;
 }
